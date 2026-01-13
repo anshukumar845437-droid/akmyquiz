@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>क्विज़ - SmartExam Quiz Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef;
+            margin: 0;
+            padding: 20px;
+        }
+        .quiz-container {
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            color: #004080;
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 8px 0;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #004080;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>क्विज़ - <span id="topic-name">SSC</span></h2>
+        <div class="question" id="question">यहां प्रश्न आएगा</div>
+        <ul class="options" id="options">
+            <!-- विकल्प यहां आएंगे -->
+        </ul>
+        <button class="btn" onclick="nextQuestion()">आगला प्रश्न</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "भारत का स्वतंत्रता दिवस कब मनाया जाता है?",
+                options: ["15 अगस्त", "26 जनवरी", "2 अक्टूबर", "1 मई"],
+                answer: "15 अगस्त"
+            },
+            {
+                question: "रेलवे का मुख्यालय कहाँ है?",
+                options: ["मुम्बई", "नई दिल्ली", "कोलकाता", "चेन्नई"],
+                answer: "नई दिल्ली"
+            }
+            // और प्रश्न जोड़ें
+        ];
+
+        let currentQuestionIndex = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestionIndex];
+            document.getElementById('question').innerText = q.question;
+            const optionsUl = document.getElementById('options');
+            optionsUl.innerHTML = '';
+            q.options.forEach(opt => {
+                const li = document.createElement('li');
+                li.innerHTML = `<input type="radio" name="option" value="${opt}"> ${opt}`;
+                optionsUl.appendChild(li);
+            });
+        }
+
+        function nextQuestion() {
+            // केवल एक बेसिक फंक्शन है
+            if (currentQuestionIndex < questions.length -1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                alert('आपने सभी प्रश्न समाप्त कर लिए हैं।');
+            }
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>
