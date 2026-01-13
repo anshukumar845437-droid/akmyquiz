@@ -1,0 +1,50 @@
+import random
+
+# Questions aur options ke saath data
+quiz_questions = [
+    {
+        "question": "Railway mein सबसे लंबी लाइन कौन सी है?",
+        "options": ["उत्तर रेलवे", "पूर्व रेलवे", "पश्चिम रेलवे", "दक्षिण रेलवे"],
+        "answer": "उत्तर रेलवे"
+    },
+    {
+        "question": "रेलवे का मुख्यालय कहाँ है?",
+        "options": ["नई दिल्ली", "मुंबई", "कोलकाता", "चेन्नई"],
+        "answer": "नई दिल्ली"
+    },
+    {
+        "question": "Railway में सबसे तेज़ ट्रेन कौन सी है?",
+        "options": ["Vande Bharat एक्सप्रेस", "Shatabdi एक्सप्रेस", "Garib Rath", "Rajdhani"],
+        "answer": "Vande Bharat एक्सप्रेस"
+    },
+    {
+        "question": "रेलवे की सेवा कब शुरू हुई थी?",
+        "options": ["1853", "1900", "1885", "1920"],
+        "answer": "1853"
+    },
+    # Aap yahan aur questions add kar sakte hain
+]
+
+def start_quiz():
+    score = 0
+    print("Welcome to SSC Railway Quiz!")
+    print("उत्तर देने के लिए नंबर चुनें।\n")
+    random.shuffle(quiz_questions)  # Questions ko randomly shuffle karne ke liye
+
+    for q in quiz_questions:
+        print("Q:", q["question"])
+        for idx, option in enumerate(q["options"], 1):
+            print(f"{idx}. {option}")
+        try:
+            user_answer = int(input("आपका उत्तर (संख्या में): "))
+            if q["options"][user_answer - 1] == q["answer"]:
+                print("बढ़िया! सही जवाब।\n")
+                score += 1
+            else:
+                print(f"गलत! सही जवाब: {q['answer']}\n")
+        except (IndexError, ValueError):
+            print("कृपया मान्य विकल्प चुनें।\n")
+    print(f"आपका स्कोर: {score} / {len(quiz_questions)}")
+
+# Quiz शुरू करें
+start_quiz()
